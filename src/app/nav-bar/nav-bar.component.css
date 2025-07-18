@@ -1,0 +1,38 @@
+.navbar{
+    display: flex;
+    flex-wrap: nowrap;
+    width: fit-content;
+    gap: 80px;
+    padding: 0 40px;
+    padding-top: 50px;
+}
+
+.logo{
+    height: 55px;
+    width: 170px;
+}
+
+.elt a{
+    text-decoration: none;
+    color: white;
+    position: relative;
+    padding-bottom: 5px;
+}
+.elt a::after{
+    content: '';
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    border-bottom: 2px dotted #ffffff;
+    height: 2px;
+    width: 0;
+    
+}
+.elt a:hover::after {
+  width: 100%;
+  transition: width 0.3s ease;
+}
+
+.elt a.active-link::after {
+  width: 100%;
+}
