@@ -4,9 +4,10 @@
     flex-direction: column;
     min-width: 100vw;
     height: 100vh;
-    background-color: pink;
+    padding: 0;
 }
 
 .nav{
     width: 100%;
+    background-color: pink;
 }

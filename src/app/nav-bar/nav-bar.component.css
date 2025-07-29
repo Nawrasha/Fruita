@@ -5,6 +5,7 @@
     gap: 80px;
     padding: 0 40px;
     padding-top: 50px;
+    z-index: 2;
 }
 
 .logo{
@@ -36,3 +37,4 @@
 .elt a.active-link::after {
   width: 100%;
 }
+
