@@ -1,3 +1,240 @@
-.home-container{
-    height: 100vh;
+.home-container {
+  background-color: pink;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100vh - 105px);
+  width: 100%;
+}
+.image-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rotating-image {
+  position: fixed;
+  width: 500px;
+  animation: rotateIn 1.2s ease-out forwards;
+  z-index: 1; 
+}
+
+.text-overlay {
+  z-index: 5; /* au-dessus */
+  width: 50%;
+}
+.text-overlay .text-img1 {
+  width: 60%;
+  opacity: 0;
+  transform: translateX(50%);
+  animation: slideFromRight 1s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+.text-overlay .text-img2 {
+  width: 90%;
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: slideFromLeft 1s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes slideFromRight {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromLeft {
+  to {
+    transform: translateX(30%);
+    opacity: 1;
+  }
+}
+
+
+
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-30deg) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+
+
+.cerise-image-container {
+  position: fixed;
+  top: 0%;
+  right: 0; /* ajuste comme tu veux */
+  z-index: 10;
+}
+
+.cerise-image {
+  width: 250px;
+  opacity: 0;
+  transform: translateY(-100%);
+  animation: slideDown 0.7s ease-out forwards;
+  animation-delay: 0.8s;
+}
+
+
+@keyframes slideDown {
+  to {
+    transform: translateY(100%);
+    opacity: 1;
+  }
+}
+
+
+.Rightgrain-image-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 20px; /* optionnel : un petit espace du bord */
+  z-index: 10;
+}
+
+.Rightgrain-image {
+  width: 200px; /* ajuste selon ton design */
+  opacity: 0;
+  animation: fadeIn 3s ease-out forwards;
+  animation-delay: 1s;
+}
+
+/* Animation fade in */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+
+.banana-image-container {    
+    position: fixed;
+    left: -4%;
+    z-index: 10;
+    bottom: 6%;
+
+}
+
+.banana-image , .oud-image{
+  width: 180px;
+  opacity: 0;
+  transform: translateY(-100%);
+  animation: slideFromLeft 0.7s ease-out forwards;
+  animation-delay: 0.4s;
+}
+
+.oud-image-container { 
+    max-width: 100px;   
+    position: fixed;
+    left: 1%;
+    z-index: 0;
+    top: 18%;
+}
+
+.oud-image{
+    width: 120px;
+}
+
+
+
+
+.Leftgrain-image-container {
+  position: fixed;
+  left: 7%;
+  top: 48%; 
+  z-index: 0;
+}
+.Leftgrain-image {
+  width: 120px;
+  opacity: 0;
+  transform: translateX(-100px) rotate(0deg);
+  animation: slideFromLeftSpin 0.7s ease-out forwards;
+  animation-delay: 1.2s;
+}
+
+@keyframes slideFromLeftSpin {
+  to {
+    transform: translateX(0) rotate(360deg);
+    opacity: 1;
+  }
+}
+
+.etoile-image-container {
+  position: fixed;
+  left: 15%;
+  top: 38%; 
+  z-index: 0;
+}
+.etoile-image {
+  width: 70px;
+  opacity: 0;
+  transform: translateX(-100px) rotate(0deg);
+  animation: slideFromLeftSpin 0.7s ease-out forwards;
+  animation-delay: 1.2s;
+}
+
+.melon-image-container {
+  position: fixed;
+  left: 2%;
+  top: 38%; 
+  z-index: 0;
+}
+.melon-image {
+  width: 80px;
+  opacity: 0;
+  transform: translateX(-100px) rotate(0deg);
+  animation: slideFromLeftSpin 0.7s ease-out forwards;
+  animation-delay: 1.2s;
+}
+
+
+
+
+
+
+.menthe-image-container {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+}
+
+
+.menthe-image {
+  width: 120px;
+  opacity: 0;
+  animation: spinIn 1.5s ease-out forwards, 
+             rotateForever 20s linear infinite;
+  animation-delay: 0s, 1.5s;
+}
+
+
+@keyframes spinIn {
+  0% {
+    opacity: 0;
+    transform: translateX(100vw) rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) rotate(1080deg);
+  }
+}
+
+@keyframes rotateForever {
+  from {
+    transform: rotate(360deg); 
+  }
+  to {
+    transform: rotate(720deg);
+  }
 }
