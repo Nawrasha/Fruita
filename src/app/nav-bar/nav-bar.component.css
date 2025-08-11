@@ -17,7 +17,9 @@
     text-decoration: none;
     color: white;
     position: relative;
-    padding-bottom: 5px;
+    padding-bottom: 8px;
+    font-weight: 450;
+    font-size: 18px;
 }
 .elt a::after{
     content: '';
@@ -40,10 +42,10 @@
 
 
 .profile {
-  margin-left: calc(100vw - 650px);
+  margin-left: calc(100vw - 620px);
 }
 .profile svg{ 
-  width: 30px;
-  height: 30px;
-
+  width: 26px;
+  height: 26px;
+  stroke: white;
 }

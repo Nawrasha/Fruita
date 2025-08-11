@@ -6,3 +6,6 @@ html, body {
   overflow-x: hidden;
   box-sizing: border-box;
 }
+.bg-theme {
+  background: linear-gradient(135deg, #fd8c9f, #fa9e73);
+}
