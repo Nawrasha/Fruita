@@ -1,0 +1,44 @@
+<div class="signup-card">
+  <h2>Créer un compte Administrateur</h2>
+
+  <form (ngSubmit)="onSubmit()">
+    <div class="input-group">
+      <label>Nom complet</label>
+      <input type="text" placeholder="Entrez votre nom complet" 
+      required [(ngModel)]="nom_complet" name="nom_complet">
+    </div>
+
+    <div class="input-group">
+      <label>Email</label>
+      <input type="email" placeholder="Entrez votre email" required
+      [(ngModel)]="email" name="email" autocomplete="username">
+    </div>
+
+    <div class="input-group">
+      <label>Mot de passe</label>
+      <input type="password" placeholder="Créez un mot de passe" required
+      [(ngModel)]="password" name="password" autocomplete="new-password">
+    </div>
+
+    <div class="input-group">
+      <label>Confirmer mot de passe</label>
+      <input type="password" placeholder="Confirmez votre mot de passe" required>
+    </div>
+
+
+    <button type="submit" [disabled]="loading">
+      {{ loading ? 'Inscription...' : 'Créer un compte' }}
+    </button>
+
+    <div *ngIf="messageSucces" style="color:#27ae60;margin-top:8px;">
+      {{ messageSucces }}
+    </div>
+    <div *ngIf="messageErreur" style="color:#c0392b;margin-top:8px;">
+      {{ messageErreur }}
+    </div>
+
+    <p class="login-text">
+      Déjà inscrit ? <a routerLink="/login">Se connecter</a>
+    </p>
+  </form>
+</div>

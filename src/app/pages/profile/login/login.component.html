@@ -1,0 +1,41 @@
+<div class="login-card">
+  <h2>Connexion Administrateur</h2>
+
+  <form (ngSubmit)="onSubmit()">
+    <div class="input-group">
+      <label>Email</label>
+      <input
+        type="email"
+        placeholder="Entrez votre email"
+        required
+        [(ngModel)]="email"
+        name="email"
+        autocomplete="username"
+      />
+    </div>
+
+    <div class="input-group">
+      <label>Mot de passe</label>
+      <input
+        type="password"
+        placeholder="Entrez votre mot de passe"
+        required
+        [(ngModel)]="password"
+        name="password"
+        autocomplete="current-password"
+      />
+    </div>
+
+    <button type="submit" [disabled]="loading">
+      {{ loading ? 'Connexion...' : 'Se connecter' }}
+    </button>
+
+    <div *ngIf="messageErreur" style="color:#c0392b;margin-top:8px;">
+      {{ messageErreur }}
+    </div>
+
+    <p class="signup-text">
+      Pas encore inscrit ? <a routerLink="/inscription">Créer un compte</a>
+    </p>
+  </form>
+</div>
