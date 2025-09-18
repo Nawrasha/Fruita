@@ -1,4 +1,4 @@
-/* .container{
+.container{
     display: flex;
     margin: 0;
     flex-direction: column;
@@ -10,4 +10,4 @@
 
 .nav{
     width: 100%;
-} */
+}

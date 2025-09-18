@@ -11,6 +11,8 @@ import { LoginComponent } from './pages/profile/login/login.component';
 import { InscriptionComponent } from './pages/profile/inscription/inscription.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { UserInterfaceComponent } from './user/user-interface/user-interface.component';
+import { SettingsComponent } from './pages/profile/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
     InscriptionComponent,
     NavBarComponent,
     DashboardComponent,
+    UserInterfaceComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,16 +6,32 @@ import { LoginComponent } from './pages/profile/login/login.component';
 import { InscriptionComponent } from './pages/profile/inscription/inscription.component';
 import { AuthGuard } from './auth.guard';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { UserInterfaceComponent } from './user/user-interface/user-interface.component';
+import { settings } from 'cluster';
+import { SettingsComponent } from './pages/profile/settings/settings.component';
 
 
 const routes: Routes = [
-  {path:'', component:HomeComponent},
-  {path:'menu/:categorie', component:MenuComponent},
-  {path: 'menu', redirectTo: 'menu/Smoothie', pathMatch: 'full' },
-  {path:'login', component:LoginComponent},
+  {path:'', component:LoginComponent},
+  {path: 'login', component: LoginComponent },
   {path:'inscription', component:InscriptionComponent},
-  {path:'admin/dashboard', component:DashboardComponent},
 
+  {path:'admin/dashboard', component:DashboardComponent, canActivate:[AuthGuard], data:{role:'admin'}},
+  {
+    path: 'user',
+    component: UserInterfaceComponent,
+    canActivate: [AuthGuard],
+    data: { role: 'user' },
+    children: [
+      {path: '', redirectTo: 'home', pathMatch: 'full' }, 
+      { path: 'home', component: HomeComponent },
+      {path:'menu/:categorie', component:MenuComponent},
+      {path: 'menu', redirectTo: 'menu/Smoothie', pathMatch: 'full' },
+      {path:'settings', component:SettingsComponent}
+    ]
+  },
+
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 @NgModule({

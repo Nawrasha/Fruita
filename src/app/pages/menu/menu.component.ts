@@ -29,27 +29,33 @@ export class MenuComponent implements OnInit {
   }
 
    getProduits() {
-  this.produitService.getProduits().subscribe((data: any) => {
-    this.produits = data;
-    // Filtre les produits selon la catégorie
+     this.produitService.getProduits().subscribe((data: any) => {
+      this.produits = data;
+
+
+      this.categories = Array.from(new Set(this.produits.map((p: any) => p.categorie)));
+
+      if (!this.categories.includes(this.categorie)) {
+      this.categorie = this.categories.length > 0 ? this.categories[0] : '';
+      this.router.navigate(['/menu', this.categorie]);
+    }
+
     this.produitsFiltres = this.produits.filter(
-      (produit: any) => produit.categorie === this.categorie
-    );
-    // Récupère toutes les catégories uniques
-    this.categories = Array.from(new Set(this.produits.map((p: any) => p.categorie)));
-  });
+        (produit: any) => produit.categorie === this.categorie
+      );
+    });
 }
 
   goToPreviousCategory() {
     const index = this.categories.indexOf(this.categorie);
     const prevIndex = (index - 1 + this.categories.length) % this.categories.length;
-    this.router.navigate(['/menu', this.categories[prevIndex]]);
+    this.router.navigate(['/user/menu', this.categories[prevIndex]]);
   }
 
   goToNextCategory() {
     const index = this.categories.indexOf(this.categorie);
     const nextIndex = (index + 1) % this.categories.length;
-    this.router.navigate(['/menu', this.categories[nextIndex]]);
+    this.router.navigate(['/user/menu', this.categories[nextIndex]]);
   }
 
 }

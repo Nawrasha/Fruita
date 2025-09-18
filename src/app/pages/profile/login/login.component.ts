@@ -36,7 +36,7 @@ export class LoginComponent {
           console.log('User role:', res.user.role);
           
         }else if (res.user.role === 'user')  {
-          this.router.navigate(['/']);
+          this.router.navigate(['/user/home']);
         }
          else  {
           this.router.navigate(['/login']);

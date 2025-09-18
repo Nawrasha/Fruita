@@ -73,11 +73,11 @@ export class AuthService {
   logout(): void {
     this.utilisateurConnecte = null;
     localStorage.removeItem('utilisateur');
+    localStorage.removeItem('token');
   }
 
-  isAdmin(): boolean {
-    const user = this.getUtilisateurConnecte();
-    return user?.role === 'admin'; // true si rôle = 'admin'
+   getRole(): string | null {
+    return this.utilisateurConnecte?.role || localStorage.getItem('role');
   }
 }
 
