@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, LoginData } from '../../../services/auth.service';
+import { ProduitService } from 'src/app/services/produit.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,9 @@ export class LoginComponent {
   messageErreur = '';
   loading = false;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService,
+    private produitService: ProduitService,
+     private router: Router) {}
 
   onSubmit(): void {
     if (this.loading) { return; }
@@ -23,9 +26,24 @@ export class LoginComponent {
     this.loading = true;
     this.auth.login(data).subscribe({
       next: (res) => {
-        this.auth.setUtilisateurConnecte(res.admin);
-        this.router.navigateByUrl('/');
+        console.log('Réponse du serveur:', res);
+        this.auth.setToken(res.token);
+        this.auth.setUtilisateurConnecte(res.user);
+        
+        if (res.user.role === 'admin') {
+          this.router.navigate(['/admin/dashboard']);
+          console.log('Navigating to admin dashboard');
+          console.log('User role:', res.user.role);
+          
+        }else if (res.user.role === 'user')  {
+          this.router.navigate(['/']);
+        }
+         else  {
+          this.router.navigate(['/login']);
+        }
+        this.loading = false;
       },
+
       error: (err) => {
         this.messageErreur = err?.error?.message || 'Erreur de connexion';
         this.loading = false;

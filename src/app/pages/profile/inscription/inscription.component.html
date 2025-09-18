@@ -8,6 +8,13 @@
       required [(ngModel)]="nom_complet" name="nom_complet">
     </div>
 
+     <!-- Menu déroulant pour le rôle -->
+    <select [(ngModel)]="role" name="role" required>
+      <option value="" disabled>Choisir un rôle</option>
+      <option value="user">User</option>
+      <option value="admin">Admin</option>
+    </select>
+
     <div class="input-group">
       <label>Email</label>
       <input type="email" placeholder="Entrez votre email" required

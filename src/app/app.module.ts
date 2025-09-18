@@ -10,6 +10,7 @@ import { MenuComponent } from './pages/menu/menu.component';
 import { LoginComponent } from './pages/profile/login/login.component';
 import { InscriptionComponent } from './pages/profile/inscription/inscription.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     MenuComponent,
     LoginComponent,
     InscriptionComponent,
-    NavBarComponent
+    NavBarComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

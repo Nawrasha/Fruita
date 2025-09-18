@@ -11,6 +11,7 @@ export class InscriptionComponent {
   nom_complet = '';
   email = '';
   password = '';
+  role = '';
   loading = false;
   messageErreur = '';
   messageSucces = '';
@@ -24,6 +25,7 @@ export class InscriptionComponent {
 
     const data: RegisterData = {
       nom_complet: this.nom_complet.trim(),
+      role: this.role.trim(),
       email: this.email.trim(),
       password: this.password
     };
@@ -40,5 +42,6 @@ export class InscriptionComponent {
         this.loading = false;
       }
     });
+    console.log(this.nom_complet, this.email, this.password, this.role);
   }
 }

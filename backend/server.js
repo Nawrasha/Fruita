@@ -6,6 +6,9 @@ const bcrypt = require('bcrypt');
 
 const app = express();
 const PORT = 3000;
+const jwt = require("jsonwebtoken");
+
+const secretKey = "ezalqikjdsqjhdaziedjhazoqdhjsiuehazoid";
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -27,13 +30,29 @@ db.connect(err => {
 });
 
 
+function authMiddleware(req, res, next) {
+  const authHeader = req.headers["authorization"];
+  if (!authHeader) return res.status(401).json({ message: "No token provided" });
+
+  const token = authHeader.split(" ")[1]; // Expect "Bearer <token>"
+  if (!token) return res.status(401).json({ message: "Invalid token format" });
+
+  try {
+    const decoded = jwt.verify(token, secretKey);
+    req.user = decoded.user;
+    next();
+  } catch {
+    res.status(403).json({ message: "Invalid or expired token" });
+  }
+}
+
 /* Routes pour le login et register  */
 
 //Route d'inscription
 
 app.post('/api/register', async (req, res) => {
   try {
-    const {nom_complet,email, password } = req.body;
+    const {nom_complet, role, email, password } = req.body;
     
     // Vérifier si l'email existe déjà
     db.query('SELECT * FROM admin WHERE email = ?', [email], async (err, results) => {
@@ -51,8 +70,8 @@ app.post('/api/register', async (req, res) => {
 
       // Insérer le nouvel utilisateur
       db.query(
-        'INSERT INTO admin (nom_complet, email, password) VALUES (?, ?, ?)',
-        [nom_complet, email, motDePasseHache],
+        'INSERT INTO admin (nom_complet, role, email, password) VALUES (?, ?, ?, ?)',
+        [nom_complet, role, email, motDePasseHache ],
         (err, result) => {
           if (err) {
             console.error('Erreur lors de l\'inscription:', err);
@@ -83,33 +102,40 @@ app.post('/api/login', (req, res) => {
       return res.status(401).json({ message: 'Email ou mot de passe incorrect' });
     }
     
-    const admin = results[0];
+    const user = results[0];
     
     // Vérifier le mot de passe
-    const motDePasseValide = await bcrypt.compare(password, admin.password);
+    const motDePasseValide = await bcrypt.compare(password, user.password);
 
     if (!motDePasseValide) {
       return res.status(401).json({ message: 'Email ou mot de passe incorrect' });
     }
-        
-    // Connexion réussie
+
+    
+    const token = jwt.sign({ user: {
+        id: user.id,
+        nom_complet: user.nom_complet,
+        email: user.email,
+        role: user.role
+      }}, secretKey, { expiresIn: "1h" });
+
     res.json({ 
-      message: 'Connexion réussie',
-      admin: {
-        id: admin.id,
-        nom_complet: admin.nom_complet,
-        email: admin.email,
-        role: admin.role
+      token,
+      user: {
+        id: user.id,
+        nom_complet: user.nom_complet,
+        email: user.email,
+        role: user.role
       }
     });
   });
 });
 
 
-
-
-
-app.get('/api/produits', (req, res) => {
+app.get('/api/produits', authMiddleware, (req, res) => {
+  if (!req.user && !req.user.id) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
   db.query('SELECT * FROM produits ORDER BY created_at DESC', (err, results) => {
     if (err) return res.status(500).send(err);
     res.json(results);
