@@ -55,7 +55,7 @@ app.post('/api/register', async (req, res) => {
     const {nom_complet, role, email, password } = req.body;
     
     // Vérifier si l'email existe déjà
-    db.query('SELECT * FROM admin WHERE email = ?', [email], async (err, results) => {
+    db.query('SELECT * FROM user WHERE email = ?', [email], async (err, results) => {
       if (err) {
         console.error('Erreur lors de la requête SQL:', err);
         return res.status(500).json({ message: 'Erreur serveur' });
@@ -70,7 +70,7 @@ app.post('/api/register', async (req, res) => {
 
       // Insérer le nouvel utilisateur
       db.query(
-        'INSERT INTO admin (nom_complet, role, email, password) VALUES (?, ?, ?, ?)',
+        'INSERT INTO user (nom_complet, role, email, password) VALUES (?, ?, ?, ?)',
         [nom_complet, role, email, motDePasseHache ],
         (err, result) => {
           if (err) {
@@ -93,7 +93,7 @@ app.post('/api/login', (req, res) => {
   const { email, password } = req.body;
   
   // Rechercher l'utilisateur par email
-  db.query('SELECT * FROM admin WHERE email = ?', [email], async (err, results) => {
+  db.query('SELECT * FROM user WHERE email = ?', [email], async (err, results) => {
     if (err) {
       return res.status(500).json({ message: 'Erreur serveur' });
     }
@@ -132,15 +132,92 @@ app.post('/api/login', (req, res) => {
 });
 
 
-app.get('/api/produits', authMiddleware, (req, res) => {
-  if (!req.user && !req.user.id) {
+app.get('/api/products', authMiddleware, (req, res) => {
+  if (!req.user || !req.user.id) {
     return res.status(401).json({ message: "Unauthorized" });
   }
-  db.query('SELECT * FROM produits ORDER BY created_at DESC', (err, results) => {
+  db.query('SELECT * FROM products ORDER BY created_at DESC', (err, results) => {
     if (err) return res.status(500).send(err);
     res.json(results);
   });
 });
+
+
+app.delete('/api/products/:id', authMiddleware, (req, res) => {
+  if (!req.user || !req.user.id || req.user.role !== 'admin') {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  const id = req.params.id;
+  
+  // Supprimer le produit par son ID
+  db.query('DELETE FROM products WHERE id = ?', [id], (err, result) => {
+    if (err) return res.status(500).send(err);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Produit non trouvé" });
+    }
+
+    res.json({ message: "Produit supprimé avec succès" });
+  });
+});
+
+app.put('/api/products/:id', authMiddleware, async (req, res) => {
+  if (!req.user || !req.user.id || req.user.role !== 'admin') {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  const id = req.params.id;
+  const { nom_produit, prix, description, categorie, image } = req.body;
+  try {
+    db.query(
+      'UPDATE products SET nom_produit=?, prix=?, description=?, categorie=?, image=? WHERE id=?',
+      [nom_produit, prix, description, categorie, image, id]
+    );
+    res.json({ message: 'Produit mis à jour avec succès' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+// Ajouter un produit
+app.post('/api/products', authMiddleware, async (req, res) => {
+  if (!req.user || !req.user.id || req.user.role !== 'admin') {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  const { nom_produit, prix, description, categorie, image } = req.body;
+
+  // Vérification des champs obligatoires
+  if (!nom_produit || !prix || !categorie || !image || !description) {
+    return res.status(400).json({ message: "Compléter tous les champs" });
+  }
+
+  try {
+    // Insertion dans la base de données
+    db.query(
+      'INSERT INTO products (nom_produit, prix, description, categorie, image) VALUES (?, ?, ?, ?, ?)',
+      [nom_produit, prix, description , categorie, image],
+      (err, result) => {
+        if (err) {
+          return res.status(500).json({ error: err.message });
+        }
+        // Retourner le produit ajouté
+        const newProduct = {
+          id: result.insertId,
+          nom_produit,
+          prix,
+          description,
+          categorie,
+          image
+        };
+        res.status(201).json({ message: "Produit ajouté avec succès", produit: newProduct });
+      }
+    );
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 
 
 app.listen(PORT, () => {
