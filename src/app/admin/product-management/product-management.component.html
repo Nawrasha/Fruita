@@ -1,0 +1,131 @@
+<div class="product-management">
+  <h2>Liste des Produits</h2>
+
+  <!-- Bouton Ajouter -->
+  <div class="actions">
+    <button class="btn btn-add" (click)="openAddModal()">Ajouter un produit</button>
+    <input type="text" placeholder="Rechercher un produit..." class="search-input">
+  </div>
+
+  <!-- Tableau des produits -->
+  <table class="product-table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Image</th>
+        <th>Nom</th>
+        <th>Catégorie</th>
+        <th>Prix</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let produit of produits">
+        <td>{{ produit.id }}</td>
+        <td><img [src]="produit.image" [alt]="produit.nom_produit"></td>
+        <td>{{ produit.nom_produit }}</td>
+        <td>{{ produit.categorie }}</td>
+        <td>{{ produit.prix }} DT</td>
+        <td>{{ produit.description }}</td>
+        <td>
+          <button class="btn btn-edit" (click)="editProduct(produit)">Modifier</button>
+          <button class="btn btn-delete" (click)="deleteProduct(produit.id)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <!-- Modal Modifier Produit -->
+  <div class="modal" *ngIf="selectedProduct">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modifier le produit</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cancelEdit()"></button>
+        </div>
+
+          <div class="modal-body">
+            <form (ngSubmit)="updateProduct()">
+              <label>Image :</label>
+              <input [(ngModel)]="selectedProduct.image" name="image" required />
+
+              <label>Nom :</label>
+              <input [(ngModel)]="selectedProduct.nom_produit" name="nom" required />
+
+              <label>Catégorie :</label>
+              <input [(ngModel)]="selectedProduct.categorie" name="categorie" required />
+
+              <label>Prix :</label>
+              <input [(ngModel)]="selectedProduct.prix" name="prix" required />
+
+              <label>Description :</label>
+              <textarea [(ngModel)]="selectedProduct.description" name="description"></textarea>
+              <div class="modal-footer">
+                <button type="submit" class="btn-save">Enregistrer</button>
+                <button type="button" (click)="cancelEdit()" class="btn-cancel">Annuler</button>
+              </div>
+            </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Ajouter Produit -->
+  <div class="modal" *ngIf="showAddModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Ajouter un produit</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cancelAdd()"></button>
+        </div>
+
+          <div class="modal-body">
+            <form (ngSubmit)="addProduct(productForm)" #productForm="ngForm" novalidate>
+
+              <label>Image  Url:</label>
+              <input [(ngModel)]="newProduct.image" name="image" required #image="ngModel" [ngClass]="{'is-invalid': image.invalid && image.touched}" />
+              <div class="error" *ngIf="image.invalid && image.touched">
+                L'image est requise
+              </div>
+
+              <label>Nom :</label>
+              <input [(ngModel)]="newProduct.nom_produit" name="nom" required #nom="ngModel" [ngClass]="{'is-invalid': nom.invalid && nom.touched}" />
+              <div class="error" *ngIf="nom.invalid && nom.touched">
+                Le nom est requis
+              </div>
+
+              <label>Catégorie :</label>
+              <input [(ngModel)]="newProduct.categorie" name="categorie" required #categorie="ngModel" [ngClass]="{'is-invalid': categorie.invalid && categorie.touched}" />
+              <div class="error" *ngIf="categorie.invalid && categorie.touched">
+                La catégorie est requise
+              </div>
+
+              <label>Prix :</label>
+              <input type="number" [(ngModel)]="newProduct.prix" name="prix" required #prix="ngModel" [ngClass]="{'is-invalid': prix.invalid && prix.touched}" />
+              <div class="error" *ngIf="prix.invalid && prix.touched">
+                Le prix est requis
+              </div>
+
+              <label>Description :</label>
+              <textarea [(ngModel)]="newProduct.description" name="description" required #description="ngModel" [ngClass]="{'is-invalid': description.invalid && description.touched}"></textarea>
+              <div class="error" *ngIf="description.invalid && description.touched">
+                La description est requise
+              </div>
+
+              <div class="modal-footer">
+                <button type="submit" class="btn-save">Enregistrer</button>
+                <button type="button" (click)="cancelAdd()" class="btn-cancel">Annuler</button>
+              </div>
+            </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+</div>

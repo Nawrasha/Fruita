@@ -1,0 +1,10 @@
+.center-container {
+  display: flex;             /* active Flexbox */
+  justify-content: center;   /* centre horizontalement */
+  align-items: center;       /* centre verticalement */
+  height: 80vh;             /* prend toute la hauteur de la page */
+}
+.btn{
+    height: 70px;
+    width: 100px;
+}

@@ -9,6 +9,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { UserInterfaceComponent } from './user/user-interface/user-interface.component';
 import { settings } from 'cluster';
 import { SettingsComponent } from './pages/profile/settings/settings.component';
+import { ProductManagementComponent } from './admin/product-management/product-management.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,21 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent },
   {path:'inscription', component:InscriptionComponent},
 
-  {path:'admin/dashboard', component:DashboardComponent, canActivate:[AuthGuard], data:{role:'admin'}},
+  {
+    path:'admin/dashboard', 
+    component:DashboardComponent, 
+    canActivate:[AuthGuard], 
+    data:{role:'admin'},
+    children: [
+      {path: 'ProductManagement', component: ProductManagementComponent},
+    ]
+  
+  
+  },
+
+
+
+  
   {
     path: 'user',
     component: UserInterfaceComponent,

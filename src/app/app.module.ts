@@ -13,6 +13,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { UserInterfaceComponent } from './user/user-interface/user-interface.component';
 import { SettingsComponent } from './pages/profile/settings/settings.component';
+import { ProductManagementComponent } from './admin/product-management/product-management.component';
+import { SidebarComponent } from './admin/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { SettingsComponent } from './pages/profile/settings/settings.component';
     DashboardComponent,
     UserInterfaceComponent,
     SettingsComponent,
+    ProductManagementComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,

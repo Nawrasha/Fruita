@@ -1,0 +1,249 @@
+.product-management {
+  padding: 30px;
+  font-family: Arial, sans-serif;
+}
+
+.product-management h2 {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.search-input {
+  padding: 5px 10px;
+  width: 300px;
+  border-radius: 5px;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.product-table th, .product-table td {
+  border: 1px solid #fa9e73;
+  padding: 10px;
+  text-align: center;
+}
+
+.product-table th {
+  background-color: #f8e1cc;
+}
+
+.product-table img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-add {
+  background-color: #ffffff;
+  color: #fa9e73;
+  border: #fa9e73 solid 1px;
+  font-weight: bold;
+  padding: 8px 12px;
+}
+
+.btn-add:hover {
+  background-color: #fa9e73;
+  color: white;
+}
+
+.btn-edit {
+  background-color: #9c9c9c;
+  color: white;
+  margin-right: 5px;
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+
+
+/* Fond assombri du modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Boîte du contenu */
+.modal-dialog {
+  max-width: 95%;   /* légèrement plus large */
+  width: 500px;     /* largeur augmentée */
+}
+
+.modal-content {
+  background: #fff;
+  padding: 8px;   /* un peu plus de padding */
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Animation d’apparition */
+@keyframes fadeIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 3px;  /* plus d’espace */
+  border-bottom: 1px solid #e5e5e5;
+  padding: 10px;
+}
+
+.modal-header h5 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+
+/* Body */
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* plus d’espace entre chaque champ */
+  padding: 0;
+}
+
+/* Labels */
+.modal-body label {
+  font-weight: bold;
+  color: #333;
+  margin: 3px; /* espace plus large sous le label */
+}
+
+/* Inputs et textarea */
+.modal-body input,
+.modal-body textarea {
+  width: 100%;
+  padding: 8px 10px;  /* un peu plus grand */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.modal-body input:focus,
+.modal-body textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+.modal-body textarea {
+  min-height: 50px;  /* textarea un peu plus grand */
+  resize: vertical;
+}
+
+/* Footer */
+.modal-footer {
+  display: flex;
+  justify-content: flex-start;
+  gap: 51%;  /* plus d’espace entre les boutons */
+  border-top: 1px solid #e5e5e5;
+  padding: 8px;
+}
+
+/* Boutons */
+.btn-save {
+  background-color: #28a745;
+  color: white;
+  padding: 8px 18px;  /* boutons plus larges */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-save:hover {
+  background-color: #218838;
+}
+
+.btn-cancel {
+  background-color: #dc3545;
+  color: white;
+  padding: 8px 18px;  /* boutons plus larges */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-cancel:hover {
+  background-color: #c82333;
+}
+
+/* règle d'erreur visible (doit venir après .modal-body input { ... }) */
+.modal-body input.is-invalid,
+.modal-body textarea.is-invalid {
+  border: 2px solid #dc3545;       /* bordure rouge plus visible */
+  background-color: #fff5f5;       /* léger fond rouge */
+  box-shadow: 0 0 6px rgba(220, 53, 69, 0.15);
+}
+
+/* focus sur un champ invalide */
+.modal-body input.is-invalid:focus,
+.modal-body textarea.is-invalid:focus {
+  box-shadow: 0 0 8px rgba(220, 53, 69, 0.2);
+  outline: none;
+}
+
+/* message d'erreur */
+.error {
+  color: #dc3545;
+  font-size: 13px;
+  margin-top: 6px;
+}
+/* règle d'erreur visible (doit venir après .modal-body input { ... }) */
+.modal-body input.is-invalid,
+.modal-body textarea.is-invalid {
+  border: 1px solid #dc3545;          /* léger fond rouge */
+  box-shadow: 0 0 6px rgba(220, 53, 69, 0.15);
+}
+
+/* focus sur un champ invalide */
+.modal-body input.is-invalid:focus,
+.modal-body textarea.is-invalid:focus {
+  box-shadow: 0 0 8px rgba(255, 12, 37, 0.2);
+  outline: none;
+}
+
+/* message d'erreur */
+.error {
+  color: #dc3545;
+  font-size: 13px;
+  margin-top: 6px;
+}
