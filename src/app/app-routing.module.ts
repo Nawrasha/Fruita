@@ -10,6 +10,8 @@ import { UserInterfaceComponent } from './user/user-interface/user-interface.com
 import { settings } from 'cluster';
 import { SettingsComponent } from './pages/profile/settings/settings.component';
 import { ProductManagementComponent } from './admin/product-management/product-management.component';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 
 const routes: Routes = [
@@ -24,9 +26,9 @@ const routes: Routes = [
     data:{role:'admin'},
     children: [
       {path: 'ProductManagement', component: ProductManagementComponent},
+      {path: 'UserManagement', component: UserManagementComponent}
     ]
-  
-  
+
   },
 
 
@@ -42,6 +44,7 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       {path:'menu/:categorie', component:MenuComponent},
       {path: 'menu', redirectTo: 'menu/Smoothie', pathMatch: 'full' },
+      {path:'cart', component:CartComponent},
       {path:'settings', component:SettingsComponent}
     ]
   },

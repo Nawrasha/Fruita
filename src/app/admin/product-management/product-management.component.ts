@@ -93,6 +93,14 @@ export class ProductManagementComponent implements OnInit {
 
   }
 
+  motCle: string = '';
+  
+  rechercher() {
+    this.produitService.rechercherProduits(this.motCle).subscribe(data => {
+      this.produits = data as any[];
+    });
+  }
+
 
 
 

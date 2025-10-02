@@ -58,4 +58,10 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['/user/menu', this.categories[nextIndex]]);
   }
 
+
+  addToCart(produit: any) {
+    produit.addedToCart = true;
+
+}
+
 }

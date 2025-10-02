@@ -29,4 +29,9 @@ export class ProduitService {
     return this.http.post(`${environment.apiUrl}/products`, produit, { headers });
   }
 
+  rechercherProduits(motCle: string): Observable<any[]> {
+    const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` };
+    return this.http.get<any[]>(`${environment.apiUrl}/products/search?keyword=${motCle}`, { headers });
+  }
+
 }

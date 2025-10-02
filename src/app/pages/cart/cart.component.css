@@ -1,0 +1,155 @@
+/* cart.component.css */
+/* cart.component.css */
+.cart-top {
+    position: relative;      /* conteneur pour positionner l'image */
+    width: 100%;
+}
+
+.cart-top-background {
+    width: 100%;
+    height: 400px;
+    background: #ac5555;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    transform: translateY(-120px); /* garde ton décalage pour couvrir la navbar */
+    position: relative;             /* pour positionner svg et img par rapport à ce conteneur */
+}
+
+svg {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    transform: translateY(-120px);  /* conserve ton décalage */
+    /* fill: #aa5959; */
+    fill: #ac5555;
+    margin-bottom: -100px;
+    top:-2px;
+}
+
+.cart-top img {
+    position: absolute;      /* positionné par rapport à .cart-top-background */
+    top: 50%;                
+    left: 50%;
+    transform: translate(-50%, -50%); /* centre exact sur le SVG */
+    width: 85%;               /* adapte selon ton besoin */
+    height: auto;
+    z-index: 10;
+}
+
+
+.cart-top h1 {
+    font-size: 2.5rem;           /* taille du texte */
+    font-weight: bold;          /* gras */
+    color: white;               /* texte blanc pour contraste */
+    text-align: center;         /* centré horizontalement */
+    margin-top: 100px;                  /* enlever les marges par défaut */
+    position: relative;         /* pour pouvoir éventuellement ajuster avec z-index */
+    z-index: 5;                 /* au-dessus du background mais sous l'image si besoin */
+    letter-spacing: 2px;        /* espacement entre lettres */
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.5); /* léger contour pour visibilité */
+}
+
+/* Optionnel : pour responsive */
+@media (max-width: 768px) {
+    .cart-top h1 {
+        font-size: 2rem;        /* réduire taille sur mobile */
+    }
+}
+
+
+.cart-container {
+  height: 150%;
+  max-width: 98vw;
+  margin: 40px auto 0 auto;
+  padding: 20px;
+  background: transparent; /* tout transparent */
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 0;
+  overflow: hidden;
+  background: transparent; /* transparent */
+}
+
+.cart-table thead {
+  background: transparent;
+}
+
+.cart-table th {
+  font-family: 'Anton', sans-serif;
+  font-size: 18px;
+  text-transform: capitalize;
+  font-weight: 400;
+  text-align: left;
+  padding: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.cart-table thead tr{
+    height: 50px;
+}
+
+.cart-table tr {
+  height: 100px; 
+  padding: 15px;
+  vertical-align: middle;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.product-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.product-cell img {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.cart-table input[type="number"] {
+  width: 70px;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  background: transparent;
+}
+
+/* Chrome, Edge, Safari */
+.cart-table input[type="number"]::-webkit-inner-spin-button,
+.cart-table input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: auto; /* forcer l'apparence par défaut */
+    margin: 0;                /* enlever le margin si besoin */
+    opacity: 1;               /* s'assure qu'elles sont visibles */
+    background: transparent;
+}
+
+
+
+
+
+.remove {
+  color: black;
+  font-size: 22px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.remove:hover {
+  color: red;
+}

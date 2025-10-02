@@ -15,6 +15,8 @@ import { UserInterfaceComponent } from './user/user-interface/user-interface.com
 import { SettingsComponent } from './pages/profile/settings/settings.component';
 import { ProductManagementComponent } from './admin/product-management/product-management.component';
 import { SidebarComponent } from './admin/sidebar/sidebar.component';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { SidebarComponent } from './admin/sidebar/sidebar.component';
     SettingsComponent,
     ProductManagementComponent,
     SidebarComponent,
+    UserManagementComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

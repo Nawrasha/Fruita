@@ -4,7 +4,7 @@
   <!-- Bouton Ajouter -->
   <div class="actions">
     <button class="btn btn-add" (click)="openAddModal()">Ajouter un produit</button>
-    <input type="text" placeholder="Rechercher un produit..." class="search-input">
+    <input [(ngModel)]="motCle" (keyup.enter)="rechercher()" type="text" placeholder="Rechercher un produit..." class="search-input">
   </div>
 
   <!-- Tableau des produits -->

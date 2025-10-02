@@ -41,10 +41,19 @@
 }
 
 
-.profile {
-  margin-left: calc(100vw - 620px);
+.cart {
+  margin-left: calc(100vw - 730px);
 }
-.profile svg{ 
+
+
+
+.profile svg{
+  width: 24px;
+  height: 24px;
+  stroke: white;
+}
+
+.cart svg {
   width: 26px;
   height: 26px;
   stroke: white;

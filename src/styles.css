@@ -1,5 +1,7 @@
 html, body {
   width: 100%;
+  height: auto;
+  min-height: 100%;
   min-width: 100vw;
   margin: 0;
   padding: 0;
@@ -8,4 +10,7 @@ html, body {
 }
 .bg-theme {
   background: linear-gradient(135deg, #fd8c9f, #fa9e73);
+  height: auto;
 }
+
+

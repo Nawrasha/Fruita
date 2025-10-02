@@ -145,6 +145,14 @@
 				<button (click)="goToNextCategory()">&#8594;</button>
 				<div class="menu-item" *ngFor="let produit of produitsFiltres">
 					<img class="menu-item-image"  [src]="produit.image" alt="{{ produit.nom_produit }}">
+					
+					<button 
+    class="add-to-cart" 
+    [class.added]="produit.addedToCart" 
+    (click)="addToCart(produit)">
+    {{ produit.addedToCart ? 'Added to Cart' : 'Add to Cart' }}
+</button>
+
 					<div class="menu-item-description">
 						<h5>
 						{{ produit.nom_produit }}
