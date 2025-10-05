@@ -1,3 +1,11 @@
+.bg-theme{
+ 
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 .login-card {
   background: white;
@@ -7,7 +15,6 @@
   width: 35%;
   height: 70vh;
   margin: auto;
-  margin-top: 50px;
   font-family: 'Poppins', sans-serif;
 }
 

@@ -8,16 +8,6 @@ import { AuthService } from './services/auth.service';
 })
 export class AuthGuard implements CanActivate {
 
-  // canActivate(
-  //   route: ActivatedRouteSnapshot,
-  //   state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-  //     const user = localStorage.getItem('Utilisateur');
-  //     if (!user) {
-  //       return false;
-  //     }
-  //     return true;
-  // }
-
   constructor(private auth: AuthService, private router: Router) {}
   
   canActivate(route: ActivatedRouteSnapshot): boolean {

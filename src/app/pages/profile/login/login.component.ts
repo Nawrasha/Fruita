@@ -26,7 +26,6 @@ export class LoginComponent {
     this.loading = true;
     this.auth.login(data).subscribe({
       next: (res) => {
-        console.log('Réponse du serveur:', res);
         this.auth.setToken(res.token);
         this.auth.setUtilisateurConnecte(res.user);
         

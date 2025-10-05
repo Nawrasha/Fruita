@@ -30,44 +30,108 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr *ngFor="let item of cartItems">
         <td class="product-cell">
-          <span>Pink Grapefruit Lemonade</span>
+          <img [src]="item.image" alt="{{item.nom_produit}}">
+          <span>{{item.nom_produit}}</span>
         </td>
-        <td>$ 11.70</td>
+        <td>${{item.prix}}</td>
         <td>
-          <input type="number" value="2" min="1">
+          <input type="number" [(ngModel)]="item.quantity" (change)="updateQuantity(item.id,item.quantity)" min="1">
         </td>
-        <td>$ 23.40</td>
-        <td class="remove">×</td>
+        <td>${{item.prix * item.quantity}} </td>
+        <td class="remove" (click)="removeFromCart(item.id)">×</td>
       </tr>
-      <tr >
-        <td class="product-cell">
-          <span>Banana Milkshake</span>
-        </td>
-        <td>$ 14.25</td>
-        <td>
-          <input type="number" value="1" min="1">
-        </td>
-        <td>$ 14.25</td>
-        <td class="remove">×</td>
-      </tr>
-      <tr>
-        <td class="product-cell">
-          <span>Blueberry Milkshake</span>
-        </td>
-        <td>$ 13.95</td>
-        <td>
-          <input type="number" value="1" min="1">
-        </td>
-        <td>$ 13.95</td>
-        <td class="remove">×</td>
-      </tr>
-      
     </tbody>
   </table>
 
-  
+  <div class="comments">
+    <h3>Order Notes</h3>
+  <div class="textarea-wrapper">
+    <textarea placeholder="Notes about your order"></textarea>
+    <button class="apply-btn">Apply</button>
+  </div>
+  </div>
+
+
+  <div class="cart-summary">
+    <h3>Cart Totals</h3>
+    <div class="summary-row">
+      <span>Subtotal</span>
+      <span>${{getSubtotal()}}</span>
+    </div>
+    <div class="summary-row">
+      <span>Shipping</span>
+      <span>Free Shipping</span>
+    </div>
+    <div class="summary-row total">
+      <span>Total</span>
+      <span>${{getSubtotal()}}</span>
+    </div>
+    <div class="checkout-btn">Valider la commande</div>
+  </div>
+
 </div>
+
+
+    <div class="cart-bottom">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+        <path d="M421.9,6.5c22.6-2.5,51.5,0.4,75.5,5.3c23.6,4.9,70.9,23.5,100.5,35.7C673.7,79.7,731.6,92,790.5,97.2
+                    c23.6,2.1,48.7,3.5,103.4-2.5c49.6-5.4,96.6-22.1,104.9-25.1c0.8-0.3,1.3-1,1.3-1.9V2c0-1.1-0.9-2-2-2H2.1c-1.1,0-2,0.9-2,2v27
+                    c0,0.8,0.5,1.5,1.2,1.8c9.8,4.2,77.3,31.9,157.2,30c39.2-0.7,92.8-6.7,134-22.4c21.2-8.1,52.2-18.2,79.7-24.2 
+                    C399.3,7.9,411.6,7.5,421.9,6.5z"></path>
+      </svg>
+
+      <div class="cart-bottom-images">
+        <img loading="lazy" src="https://faryita.wpengine.com/wp-content/uploads/2024/03/footer-img-1.png" 
+    alt="footer-img-1" srcset="https://faryita.wpengine.com/wp-content/uploads/2024/03/footer-img-1.png 800w, 
+      https://faryita.wpengine.com/wp-content/uploads/2024/03/footer-img-1-280x300.png 280w, https://faryita.wpengine.com/wp-content/uploads/2024/03/footer-img-1-768x822.png 768w"
+      sizes="(max-width: 800px) 100vw, 800px" class="footer left">
+          
+          <img loading="lazy"  src="https://faryita.wpengine.com/wp-content/uploads/2024/03/footer-img-2.png"
+          class="footer right" alt="footer-img-2" srcset="https://faryita.wpengine.com/wp-content/uploads/2024/03/footer-img-2.png 800w, https://faryita.wpengine.com/wp-content/uploads/2024/03/footer-img-2-300x241.png 300w, https://faryita.wpengine.com/wp-content/uploads/2024/03/footer-img-2-768x617.png 768w" sizes="(max-width: 800px) 100vw, 800px">
+      </div>
+
+      <div class="cart-bottom-background">
+        <div class="footer-container">
+          
+          <!-- Colonne 1 -->
+          <div class="footer-column">
+            <img src="https://frappe.qodeinteractive.com/wp-content/uploads/2018/05/logo-light-1.png" 
+                alt="App Logo" class="footer-logo">
+            <p class="description">
+            The best smoothies & juices for your healthy lifestyle.
+            Fresh, tasty, and made with love!
+            Every sip is packed with natural flavors, hand-picked fruits,
+              and the perfect balance of nutrients to energize your day.
+            </p>
+          </div>
+
+          <!-- Colonne 2 -->
+          <div class="footer-column">
+            <h3>Get in Touch</h3>
+            <p>Email: contact@yourapp.com</p>
+            <p>Phone: +1 234 567 890</p>
+            <p>Street: 123 Smoothie Ave, City</p>
+          </div>
+
+          <!-- Colonne 3 -->
+          <div class="footer-column">
+            <h3>Shop</h3>
+            <a >Smoothies</a><br>
+            <a >Juices</a><br>
+            <a >Snacks</a><br>
+            <a >Special Offers</a>
+          </div>
+
+        </div>
+        <p class="footer-bottom">© 2025 YourApp. All rights reserved.</p>
+        </div>
+     </div>
+
+
+
+
+
 
 </div>
