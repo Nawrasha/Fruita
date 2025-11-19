@@ -8,7 +8,6 @@ const bcrypt = require('bcrypt');
 router.post('/', async (req, res) => {
   try {
     const {nom_complet, role, email, password } = req.body;
-    
     // Vérifier si l'email existe déjà
     db.query('SELECT * FROM user WHERE email = ?', [email], async (err, results) => {
       if (err) {

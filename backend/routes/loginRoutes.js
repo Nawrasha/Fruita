@@ -3,7 +3,9 @@ const router = express.Router();
 const db = require('../config/db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const secretKey = "ezalqikjdsqjhdaziedjhazoqdhjsiuehazoid";
+const secretKey = process.env.JWT_SECRET;
+
+
 
 // Route de connexion
 
@@ -35,7 +37,7 @@ router.post('/', (req, res) => {
         nom_complet: user.nom_complet,
         email: user.email,
         role: user.role
-      }}, secretKey, { expiresIn: "1h" });
+      }}, secretKey, { expiresIn: process.env.JWT_EXPIRES_IN || '1h' });
 
     res.json({ 
       token,
